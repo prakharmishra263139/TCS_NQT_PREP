@@ -1,45 +1,25 @@
-import java.util.Arrays;
-
 public class secondLargest {
+    public static  int  findSecondLargest(int[] array) {
+        int n = array.length;
+        int largest = array[0];
 
-    public static int method1(int array[]){
-        int n=array.length;
-        Arrays.sort(array);
-
-        return array[n-2];
-    }
-
-    public static void method2(int array[]){
-        int n=array.length;
-
-        int small=Integer.MAX_VALUE;
-        int secondsmall=Integer.MAX_VALUE;
-        int large=Integer.MIN_VALUE;
-        int secondlarge=Integer.MIN_VALUE;
-
-        for(int i=0;i<n;i++){
-            small=Math.min(small,array[i]);
-            large=Math.max(large,array[i]);
-        }
-
-        for(int i=0;i<n;i++){
-            if(array[i]<secondsmall && array[i]!=small){
-                secondsmall=array[i];
-            }
-
-            if(array[i]>secondlarge && array[i]!=large){
-                secondlarge=array[i];
+        for (int i = 1; i < n; i++) {
+            if (array[i] > largest) {
+                largest = array[i];
             }
         }
-
-        System.out.println("Element is: "+secondlarge);
-
+        int second = 0;
+        for (int i = n - 2; i >= 0; i--) {
+            if (array[i] != largest) {
+                second = array[i];
+                break;
+            }
+        }
+        return second;
     }
-    public static void main(String[] args) {
-        int array[]={3,2,1,4,5,6};
-        int max = method1(array);
-        System.out.println("Second Largest: "+max);
-
-        method2(array);
+    public static void main(String args[]) {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int secondLargest = findSecondLargest(numbers);
+        System.out.println("Second largest element in the array is: " + secondLargest);
     }
 }
